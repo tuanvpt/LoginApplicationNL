@@ -1,14 +1,19 @@
 package com.example.loginapplicationnl.ui.login
 
+import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
+import android.view.View
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.Navigation
 import com.example.loginapplicationnl.R
 import com.example.loginapplicationnl.base.BaseFragment
 import com.example.loginapplicationnl.databinding.FragmentLoginBinding
 import com.example.loginapplicationnl.utils.ViewUtils.hideKeyboard
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.GlobalContext.startKoin
 import java.util.regex.Pattern
 
 
@@ -29,6 +34,19 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         doinits()
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel = getBaseViewModel()
+        startKoin {
+            androidContext(requireContext())
+            this.modules(listOf(viewModel.retrofitModule, viewModel.signInViewModel, viewModel.retrofitModule, viewModel.signInApi))
+        }
+    }
+
+    private fun loginLiveData() {
+        TODO("Not yet implemented")
+    }
+
     private fun doinits() {
         gettextwathcerlogin()
         viewBinding.btnLogin.setOnClickListener() {
@@ -39,13 +57,19 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                 showToast("error")
                 return@setOnClickListener
             } else {
-                getLogin()
+                getLogin(stringEmailorMobile, stringPassword)
             }
         }
     }
 
-    private fun getLogin() {
-        showToast("Welcome")
+    private fun getLogin(email: String, password: String) {
+        viewModel.signInMethod(email, password)
+        viewModel.isLoading.observe(this, Observer {
+
+        })
+        viewModel.signIn.observe(this, Observer {
+            viewBinding.edtEmail.setText("Login thanh cong")
+        })
     }
 
     private fun validateUserEmailorMobile(): Boolean {

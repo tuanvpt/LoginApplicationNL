@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 abstract class BaseViewModel : ViewModel() {
 
-    val isLoading = MutableLiveData<Boolean>()
+    open val isLoading = MutableLiveData<Boolean>()
     val exception = MutableLiveData<Exception>()
 
     protected fun <T> launchTaskSync(
