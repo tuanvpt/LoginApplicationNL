@@ -1,5 +1,6 @@
 package com.example.loginapplicationnl.di
 
+import com.example.loginapplicationnl.utils.Constant
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import org.koin.dsl.module
@@ -16,9 +17,8 @@ val repository = module {
 }
 
 fun provideRetrofit(gson: Gson): Retrofit? {
-    return Retrofit.Builder()
+    return Retrofit.Builder().baseUrl(Constant.BASE_URL)
         .addConverterFactory(GsonConverterFactory.create(gson))
-        .baseUrl("")
         .build()
 }
 
