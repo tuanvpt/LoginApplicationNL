@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.fragment.app.Fragment
 
 /**
  * Utilities of View
@@ -36,14 +37,12 @@ object ViewUtils {
         }
     }
 
-    /**
-     * Hide keyboard
-     *
-     * @param context context
-     * @param view    view need focus
-     */
-    fun hideKeyboardFrom(context: Context, view: View) {
-        val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(view.windowToken, 0)
+    fun Fragment.hideKeyboard() {
+        view?.let { activity?.hideKeyboard(it) }
+    }
+
+    fun Context.hideKeyboard(view: View) {
+        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }

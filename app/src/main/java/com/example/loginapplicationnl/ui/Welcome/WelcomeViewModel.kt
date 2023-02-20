@@ -1,4 +1,6 @@
 package com.example.loginapplicationnl.ui.Welcome
 
-class WelcomeViewModel {
+import com.example.loginapplicationnl.base.BaseViewModel
+
+class WelcomeViewModel: BaseViewModel() {
 }

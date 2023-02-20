@@ -10,9 +10,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.viewbinding.ViewBinding
 
 abstract class BaseDialog<V : ViewBinding>() : DialogFragment() {
-
     protected lateinit var viewBinding: V
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
