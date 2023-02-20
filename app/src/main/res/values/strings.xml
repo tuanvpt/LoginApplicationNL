@@ -19,7 +19,7 @@
     <string name="txt_or">or</string>
     <string name="txtPlatform">New on our platform ?</string>
     <string name="txtCreateAccount">Create an account</string>
-    <string name="iconfacebook">iconFacebook</string>
+    <string name="icon_facebook">iconFacebook</string>
     <string name="ic_twitter">TODO</string>
     <string name="ic_gmail">TODO</string>
     <string name="ic_git">TODO</string>

@@ -166,7 +166,7 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/iconfacebook"
+                android:contentDescription="@string/icon_facebook"
                 android:src="@drawable/ic_facebook" />
 
             <androidx.appcompat.widget.AppCompatImageView

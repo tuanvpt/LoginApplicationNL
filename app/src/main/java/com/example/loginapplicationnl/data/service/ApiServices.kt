@@ -8,7 +8,7 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface ApiServices {
-    @POST("/${Constant.BASE_URL_SIGNIN}")
+    @POST("auth/signin")
     suspend fun postSignIn(@Body request:LoginDataModel ) : Response<LoginResponses>
 
 }
