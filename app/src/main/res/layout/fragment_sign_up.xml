@@ -14,9 +14,9 @@
         android:scaleType="centerCrop"
         android:src="@drawable/illu_sign_up"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:src="@drawable/illu_login"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/illu_login" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textView"
@@ -42,6 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:scaleType="centerInside"
         android:hint="@string/edt_first_name"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         tools:layout_editor_absoluteX="0dp" />
@@ -71,29 +72,35 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:hint="@string/txt_password"
+        android:scaleType="centerInside"
         app:layout_constraintTop_toBottomOf="@+id/edtEmail"
         tools:layout_editor_absoluteX="0dp" />
 
 
-    <CheckBox
-        android:id="@+id/cbAgree"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/llc_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="i agree to"
+        android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/edtPassword">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/cbPolicy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/txt_policy"
-        android:fontFamily="@font/montserrat_light"
-        android:textColor="@color/cornflower_blue"
-        app:layout_constraintStart_toEndOf="@+id/cbAgree"
-        app:layout_constraintTop_toBottomOf="@+id/edtPassword" />
+        <CheckBox
+            android:id="@+id/cbAgree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cb_agree" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/cbPolicy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/montserrat_light"
+            android:text="@string/txt_policy"
+            android:textColor="@color/cornflower_blue" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/appCompatButton"
@@ -102,7 +109,7 @@
         android:text="@string/btn_sign_up"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cbPolicy" />
+        app:layout_constraintTop_toBottomOf="@+id/llc_checkbox" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/appCompatTextView"
@@ -128,7 +135,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appCompatTextView2">
 
@@ -139,23 +145,23 @@
             android:layout_centerInParent="true"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:text="or"
+            android:text="@string/txt_or"
             android:textColor="@color/gray" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
-            android:layout_toLeftOf="@id/tvText"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_toStartOf="@id/tvText"
             android:background="#FF0000" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_centerVertical="true"
-            android:layout_marginRight="16dp"
-            android:layout_toRightOf="@id/tvText"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:layout_toEndOf="@id/tvText"
             android:background="#FF0000" />
     </RelativeLayout>
 
@@ -176,19 +182,19 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_11sdp"
+            android:layout_marginStart="@dimen/_11sdp"
             android:src="@drawable/ic_twitter" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_11sdp"
+            android:layout_marginStart="@dimen/_11sdp"
             android:src="@drawable/ic_mail" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_11sdp"
+            android:layout_marginStart="@dimen/_11sdp"
             android:src="@drawable/ic_git" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
