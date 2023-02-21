@@ -1,35 +1,41 @@
 package com.example.loginapplicationnl.ui.login
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.Navigation
 import com.example.loginapplicationnl.R
-import com.example.loginapplicationnl.base.BaseFragment
 import com.example.loginapplicationnl.databinding.FragmentLoginBinding
+import com.example.loginapplicationnl.utils.LogUtil
 import com.example.loginapplicationnl.utils.ViewUtils.hideKeyboard
 import org.koin.android.ext.android.inject
 
-class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
-
-
+class LoginFragment : Fragment() {
     private val presenter: LoginViewModel by inject()
-
     lateinit var stringEmail: String
     lateinit var stringPassword: String
 
-    override fun inflateViewBinding(inflater: LayoutInflater) =
-        FragmentLoginBinding.inflate(inflater)
+    private lateinit var viewBinding: FragmentLoginBinding
 
-    override fun getViewModelClass(): Class<LoginViewModel> {
-        return LoginViewModel::class.java
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        viewBinding = FragmentLoginBinding.inflate(inflater, container, false)
+        return viewBinding.root
+
+
     }
 
-    override fun setUpView() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         createAccount()
         doinits()
     }
+
 
     private fun doinits() {
         viewBinding.btnLogin.setOnClickListener() {
@@ -37,19 +43,18 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
             stringEmail = viewBinding.edtEmail.text.toString().trim()
             stringPassword = viewBinding.edtPassword.text.toString().trim()
             if (!validateUserEmailorMobile() or !validateUserPassword()) {
-                showToast("error")
+                LogUtil.e("error")
                 return@setOnClickListener
             } else {
-
                 getLogin()
             }
         }
     }
 
     private fun getLogin() {
-        presenter.login.observe(this, Observer {
+        presenter.login.observe(viewLifecycleOwner, Observer {
             presenter.loginUser(stringEmail, stringPassword)
-            showToast("Thanh Cong")
+            LogUtil.e("Thanh Cong")
         })
     }
 
@@ -81,9 +86,5 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         viewBinding.txtCreateAccount.setOnClickListener() {
             Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_signUpFragment)
         }
-    }
-
-    override fun getViewModelProviderOwner(): ViewModelStoreOwner {
-        return this
     }
 }
