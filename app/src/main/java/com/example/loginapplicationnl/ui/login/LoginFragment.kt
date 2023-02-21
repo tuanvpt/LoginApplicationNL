@@ -2,14 +2,19 @@ package com.example.loginapplicationnl.ui.login
 
 import android.view.LayoutInflater
 import android.view.View
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.Navigation
 import com.example.loginapplicationnl.R
 import com.example.loginapplicationnl.base.BaseFragment
 import com.example.loginapplicationnl.databinding.FragmentLoginBinding
 import com.example.loginapplicationnl.utils.ViewUtils.hideKeyboard
+import org.koin.android.ext.android.inject
 
 class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
+
+
+    private val presenter: LoginViewModel by inject()
 
     lateinit var stringEmail: String
     lateinit var stringPassword: String
@@ -35,15 +40,17 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                 showToast("error")
                 return@setOnClickListener
             } else {
-                viewModel.loginUser(stringEmail, stringPassword)
+
                 getLogin()
             }
         }
     }
 
     private fun getLogin() {
-        //TODO go to screen welcome
-
+        presenter.login.observe(this, Observer {
+            presenter.loginUser(stringEmail, stringPassword)
+            showToast("Thanh Cong")
+        })
     }
 
     private fun validateUserEmailorMobile(): Boolean {
