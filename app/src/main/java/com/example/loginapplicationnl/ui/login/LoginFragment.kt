@@ -1,5 +1,8 @@
 package com.example.loginapplicationnl.ui.login
 
+import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import androidx.lifecycle.Observer
@@ -24,9 +27,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         createAccount()
         doinits()
     }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        getLogin()
+    }
 
     private fun doinits() {
-        getLogin()
         viewBinding.btnLogin.setOnClickListener() {
             hideKeyboard()
             stringEmail = viewBinding.edtEmail.text.toString().trim()
@@ -41,19 +47,21 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     }
 
     private fun getLogin() {
-        presenter.login.observe(this, Observer {
+        presenter.login.observe(this) {
             when (it) {
                 is LoginViewModel.LoginState.Loading -> showLoading()
                 is LoginViewModel.LoginState.Successful -> {
                     hideLoading()
-                    findNavController().navigate(R.id.action_loginFragment_to_welcomeFragment)
+                    findNavController().navigate(R.id.action_loginFragment_to_welcomeFragment, args = Bundle().apply {
+                        putParcelable("LoginResponse", it.loginResponses )
+                    })
                 }
                 is LoginViewModel.LoginState.Failure -> {
                     showToast("That bai")
                     hideLoading()
                 }
             }
-        })
+        }
     }
 
     private fun validateUserEmailorMobile(): Boolean {

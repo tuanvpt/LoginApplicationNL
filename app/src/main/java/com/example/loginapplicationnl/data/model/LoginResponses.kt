@@ -1,7 +1,11 @@
 package com.example.loginapplicationnl.data.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
+import java.io.Serializable
 
+@Parcelize
 class LoginResponses(
     @SerializedName("_id")
     val id: String,
@@ -19,4 +23,4 @@ class LoginResponses(
     val token: String,
     @SerializedName("refreshToken")
     val freshToken: String,
-)
+) : Parcelable

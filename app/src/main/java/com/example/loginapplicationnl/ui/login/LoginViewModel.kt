@@ -7,6 +7,7 @@ import com.example.loginapplicationnl.base.BaseViewModel
 import com.example.loginapplicationnl.data.model.LoginRequest
 import com.example.loginapplicationnl.data.model.LoginResponses
 import com.example.loginapplicationnl.data.repository.LoginRepository
+import com.example.loginapplicationnl.data.repository.LoginRepositoryImp
 import com.example.loginapplicationnl.di.viewModelModule
 import com.example.loginapplicationnl.utils.LogUtil
 import kotlinx.coroutines.Dispatchers
@@ -26,7 +27,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : BaseViewMod
 
     sealed class LoginState {
         object Loading : LoginState()
-        object Successful : LoginState()
+        class Successful(val loginResponses: LoginResponses) : LoginState()
         object Failure : LoginState()
     }
 
@@ -38,12 +39,11 @@ class LoginViewModel(private val loginRepository: LoginRepository) : BaseViewMod
                     password = pwd,
                     email = email
                 )
-                loginRepository.postLogin(loginRequest);
-                _login.postValue(LoginState.Successful)
+                val res = loginRepository.postLogin(loginRequest);
+                _login.postValue(LoginState.Successful(res))
             } catch (ex: Exception) {
                 _login.postValue(LoginState.Failure)
             }
         }
     }
-
 }

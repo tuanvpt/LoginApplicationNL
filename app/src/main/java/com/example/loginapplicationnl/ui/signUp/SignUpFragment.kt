@@ -20,5 +20,4 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding, SignUpViewModel>() {
             findNavController().navigateUp()
         }
     }
-
 }
