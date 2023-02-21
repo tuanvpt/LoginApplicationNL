@@ -24,6 +24,14 @@
         <item name="android:lineHeight">@dimen/_21sdp</item>
     </style>
 
+    <style name="ParagraphSmallError">
+        <item name="android:fontFamily">@font/montserrat_light</item>
+        <item name="android:textColor">@color/mandy</item>
+        <item name="android:fontWeight">400</item>
+        <item name="android:textSize">@dimen/_12sdp</item>
+        <item name="android:lineHeight">@dimen/_18sdp</item>
+    </style>
+
     <style name="Button">
         <item name="android:fontFamily">@font/montserrat_light</item>
         <item name="android:textColor">@color/white</item>

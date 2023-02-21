@@ -9,7 +9,7 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_180sdp"
+        android:layout_height="@dimen/_140sdp"
         android:layout_alignParentBottom="true"
         android:layerType="software"
         android:scaleType="centerCrop"
@@ -22,8 +22,7 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_12sdp"
-        android:layout_marginEnd="@dimen/_12sdp"
+        android:layout_marginHorizontal="@dimen/_12sdp"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView">
@@ -47,39 +46,95 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtHeader1" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtTitleEmail"
+            style="@style/Paragraph"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_17sdp"
+            android:text="@string/txt_email" />
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:hint="@string/txt_email"
+            android:layout_height="@dimen/_38sdp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/edt_background"
+            android:hint="@string/txt_hint_email"
             android:inputType="textEmailAddress"
-            app:layout_constraintTop_toBottomOf="@+id/txtParagrap"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_15sdp"
+            android:textColorHint="@color/french_gray"
             tools:layout_editor_absoluteX="0dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtEmailErrorMessage"
+            style="@style/ParagraphSmallError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/msg_email"
+            android:visibility="invisible" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtTitlePassword"
+                style="@style/Paragraph"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_password"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtForgetPassword"
+                style="@style/Paragraph"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_forgot_password"
+                android:textColor="@color/cornflower_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:hint="@string/txt_password"
+            android:layout_height="@dimen/_38sdp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/edt_background"
+            android:hint="@string/txt_hint_password"
             android:inputType="textPassword"
-            app:layout_constraintTop_toBottomOf="@+id/edt_email"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_15sdp"
+            android:textColorHint="@color/french_gray"
             tools:layout_editor_absoluteX="0dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtPasswordErrorMessage"
+            style="@style/ParagraphSmallError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/msg_password"
+            android:visibility="invisible" />
 
         <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/checkBox"
             style="@style/Paragraph"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/cb_remember_me"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edt_password" />
+            android:text="@string/cb_remember_me" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnLogin"
             style="@style/Button"
-            android:layout_width="@dimen/_200sdp"
+            android:layout_width="@dimen/_280sdp"
             android:layout_height="@dimen/_38sdp"
             android:layout_gravity="center"
             android:background="@drawable/button_custom"
@@ -92,7 +147,7 @@
             android:id="@+id/llcCreateAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginTop="14dp"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnLogin">
@@ -190,5 +245,6 @@
                 android:contentDescription="@string/ic_git"
                 android:src="@drawable/ic_git" />
         </LinearLayout>
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.constraintlayout.widget.ConstraintLayout>

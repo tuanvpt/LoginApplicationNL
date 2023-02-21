@@ -3,21 +3,39 @@ package com.example.loginapplicationnl.di
 import com.example.loginapplicationnl.utils.Constant
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 val networkModule = module {
     single { provideGson() }
-    single { provideRetrofit(get()) }
+    single { provideRetrofit(get(), get()) }
+    single { createOkHttpClient() }
+    single { createOkHttpClient() }
 }
 
 val repository = module {
 
 }
 
-fun provideRetrofit(gson: Gson): Retrofit? {
-    return Retrofit.Builder().baseUrl(Constant.BASE_URL)
+private const val TIME_OUT = 30L
+
+fun createOkHttpClient(): OkHttpClient {
+    val httpLoggingInterceptor = HttpLoggingInterceptor()
+    httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BASIC
+    return OkHttpClient.Builder()
+        .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
+        .readTimeout(TIME_OUT, TimeUnit.SECONDS)
+        .addInterceptor(httpLoggingInterceptor).build()
+}
+
+fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit? {
+    return Retrofit.Builder()
+        .baseUrl(Constant.BASE_URL)
+        .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
 }

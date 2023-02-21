@@ -8,7 +8,7 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_180sdp"
+        android:layout_height="@dimen/_140sdp"
         android:layout_alignParentBottom="true"
         android:layerType="software"
         android:scaleType="centerCrop"
@@ -18,12 +18,10 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/illu_login" />
 
-
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_12sdp"
-        android:layout_marginEnd="@dimen/_12sdp"
+        android:layout_marginHorizontal="@dimen/_12sdp"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView">
@@ -47,47 +45,102 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtHeader1" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtFistName"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtTitleFirstName"
+            style="@style/Paragraph"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/edt_first_name"
-            android:inputType="textEmailAddress"
-            app:layout_constraintTop_toBottomOf="@+id/txtParagrap"
+            android:text="@string/edt_first_name" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_38sdp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/edt_background"
+            android:hint="@string/hint_name"
+            android:inputType="text"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_15sdp"
+            android:textColorHint="@color/french_gray"
             tools:layout_editor_absoluteX="0dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtTitleLastName"
+            style="@style/Paragraph"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/edt_last_name" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtLastName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/edt_last_name"
-            android:inputType="textEmailAddress"
-            app:layout_constraintTop_toBottomOf="@+id/txtParagrap"
+            android:layout_height="@dimen/_38sdp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/edt_background"
+            android:hint="@string/hint_name"
+            android:inputType="text"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_15sdp"
+            android:textColorHint="@color/french_gray"
             tools:layout_editor_absoluteX="0dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtTitleEmail"
+            style="@style/Paragraph"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_email" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/txt_email"
+            android:layout_height="@dimen/_38sdp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/edt_background"
+            android:hint="@string/txt_hint_email"
             android:inputType="textEmailAddress"
-            app:layout_constraintTop_toBottomOf="@+id/txtParagrap"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_15sdp"
+            android:textColorHint="@color/french_gray"
             tools:layout_editor_absoluteX="0dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtEmailErrorMessage"
+            style="@style/ParagraphSmallError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/msg_email"
+            android:visibility="gone" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtTitlePassword"
+            style="@style/Paragraph"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_password"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/txt_password"
+            android:layout_height="@dimen/_38sdp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/edt_background"
+            android:hint="@string/txt_hint_password"
             android:inputType="textPassword"
-            app:layout_constraintTop_toBottomOf="@+id/edt_email"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_15sdp"
+            android:textColorHint="@color/french_gray"
             tools:layout_editor_absoluteX="0dp" />
-
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/checkBox"
                 style="@style/Paragraph"
@@ -113,7 +166,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnLogin"
             style="@style/Button"
-            android:layout_width="@dimen/_200sdp"
+            android:layout_width="@dimen/_280sdp"
             android:layout_height="@dimen/_38sdp"
             android:layout_gravity="center"
             android:background="@drawable/button_custom"
@@ -225,5 +278,4 @@
                 android:src="@drawable/ic_git" />
         </LinearLayout>
     </androidx.appcompat.widget.LinearLayoutCompat>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
