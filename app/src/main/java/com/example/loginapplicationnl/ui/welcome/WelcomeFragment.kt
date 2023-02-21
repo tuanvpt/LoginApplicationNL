@@ -1,7 +1,7 @@
-package com.example.loginapplicationnl.ui.Welcome
+package com.example.loginapplicationnl.ui.welcome
 
 import android.view.LayoutInflater
-import androidx.lifecycle.ViewModelStoreOwner
+import androidx.navigation.fragment.findNavController
 import com.example.loginapplicationnl.base.BaseFragment
 import com.example.loginapplicationnl.databinding.FragmentWelcomeBinding
 
@@ -9,15 +9,9 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding, WelcomeViewModel>()
     override fun inflateViewBinding(inflater: LayoutInflater) =
         FragmentWelcomeBinding.inflate(inflater)
 
-    override fun getViewModelClass(): Class<WelcomeViewModel> {
-        return WelcomeViewModel::class.java
-    }
-
     override fun setUpView() {
-
-    }
-
-    override fun getViewModelProviderOwner(): ViewModelStoreOwner {
-        return this
+        viewBinding.imageView.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 }

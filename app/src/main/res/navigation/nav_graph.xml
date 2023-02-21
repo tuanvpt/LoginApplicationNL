@@ -23,6 +23,6 @@
         android:label="SignUpFragment" />
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="com.example.loginapplicationnl.ui.Welcome.WelcomeFragment"
+        android:name="com.example.loginapplicationnl.ui.welcome.WelcomeFragment"
         android:label="WelcomeFragment" />
 </navigation>

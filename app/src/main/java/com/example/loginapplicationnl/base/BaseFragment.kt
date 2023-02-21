@@ -14,9 +14,6 @@ import com.example.loginapplicationnl.dialogManager.DialogManager
 import com.example.loginapplicationnl.dialogManager.DialogManagerImpl
 
 abstract class BaseFragment<V : ViewBinding, VM : BaseViewModel> : Fragment() {
-
-    protected lateinit var viewModel: VM
-
     private var _viewBinding: V? = null
     protected val viewBinding get() = _viewBinding!!
 
@@ -38,7 +35,6 @@ abstract class BaseFragment<V : ViewBinding, VM : BaseViewModel> : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = getBaseViewModel()
         setUpView()
         registerLiveData()
     }
@@ -55,20 +51,8 @@ abstract class BaseFragment<V : ViewBinding, VM : BaseViewModel> : Fragment() {
 
     abstract fun setUpView()
 
-    open fun getBaseViewModel(): VM {
-        return ViewModelProvider(getViewModelProviderOwner())[getViewModelClass()]
-    }
-
-    abstract fun getViewModelProviderOwner(): ViewModelStoreOwner
-
-    abstract fun getViewModelClass(): Class<VM>
-
     open fun registerLiveData() {
-        viewModel.run {
-            isLoading.observe(viewLifecycleOwner) {
-                if (it) showLoading() else hideLoading()
-            }
-        }
+//        }
     }
 
     /**

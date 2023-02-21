@@ -7,6 +7,7 @@ import com.example.loginapplicationnl.base.BaseViewModel
 import com.example.loginapplicationnl.data.model.LoginRequest
 import com.example.loginapplicationnl.data.model.LoginResponses
 import com.example.loginapplicationnl.data.repository.LoginRepository
+import com.example.loginapplicationnl.di.viewModelModule
 import com.example.loginapplicationnl.utils.LogUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,18 +15,23 @@ import org.koin.java.KoinJavaComponent.inject
 import retrofit2.Callback
 import retrofit2.Response
 
-class LoginViewModel(private val loginRepository: LoginRepository) : BaseViewModel(),
-    Callback<LoginResponses> {
+class LoginViewModel(private val loginRepository: LoginRepository) : BaseViewModel() {
 
     /*var loginResponses: LoginResponses =
         LoginResponses(id = "", email = "", false, firstName = "", "", "", "", "");*/
 
-    private val _login = MutableLiveData<LoginResponses>()
-    val login: LiveData<LoginResponses>
+    private val _login = MutableLiveData<LoginState>()
+    val login: LiveData<LoginState>
         get() = _login
 
+    sealed class LoginState {
+        object Loading : LoginState()
+        object Successful : LoginState()
+        object Failure : LoginState()
+    }
+
     fun loginUser(email: String, pwd: String) {
-        isLoading.value = true
+        _login.postValue(LoginState.Loading)
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val loginRequest = LoginRequest(
@@ -33,25 +39,11 @@ class LoginViewModel(private val loginRepository: LoginRepository) : BaseViewMod
                     email = email
                 )
                 loginRepository.postLogin(loginRequest);
+                _login.postValue(LoginState.Successful)
             } catch (ex: Exception) {
-                /* loginResult.value = BaseResponse.Error(ex.message)*/
-                ex.message?.let { LogUtil.e(it) }
+                _login.postValue(LoginState.Failure)
             }
         }
     }
 
-    override fun onResponse(
-        call: retrofit2.Call<LoginResponses>,
-        response: Response<LoginResponses>
-    ) {
-        if (response.isSuccessful) {
-            _login.value = response.body()
-        } else {
-            LogUtil.e("Loi roi")
-        }
-    }
-
-    override fun onFailure(call: retrofit2.Call<LoginResponses>, t: Throwable) {
-        LogUtil.e(t.message.toString())
-    }
 }

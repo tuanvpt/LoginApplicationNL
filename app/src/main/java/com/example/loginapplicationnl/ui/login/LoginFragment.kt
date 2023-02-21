@@ -3,18 +3,16 @@ package com.example.loginapplicationnl.ui.login
 import android.view.LayoutInflater
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.loginapplicationnl.R
 import com.example.loginapplicationnl.base.BaseFragment
 import com.example.loginapplicationnl.databinding.FragmentLoginBinding
 import com.example.loginapplicationnl.utils.ViewUtils.hideKeyboard
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
-
-
-    private val presenter: LoginViewModel by inject()
+    private val presenter: LoginViewModel by viewModel<LoginViewModel>()
 
     lateinit var stringEmail: String
     lateinit var stringPassword: String
@@ -22,16 +20,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     override fun inflateViewBinding(inflater: LayoutInflater) =
         FragmentLoginBinding.inflate(inflater)
 
-    override fun getViewModelClass(): Class<LoginViewModel> {
-        return LoginViewModel::class.java
-    }
-
     override fun setUpView() {
         createAccount()
         doinits()
     }
 
     private fun doinits() {
+        getLogin()
         viewBinding.btnLogin.setOnClickListener() {
             hideKeyboard()
             stringEmail = viewBinding.edtEmail.text.toString().trim()
@@ -40,16 +35,24 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                 showToast("error")
                 return@setOnClickListener
             } else {
-
-                getLogin()
+                presenter.loginUser(email = stringEmail, pwd = stringPassword)
             }
         }
     }
 
     private fun getLogin() {
         presenter.login.observe(this, Observer {
-            presenter.loginUser(stringEmail, stringPassword)
-            showToast("Thanh Cong")
+            when (it) {
+                is LoginViewModel.LoginState.Loading -> showLoading()
+                is LoginViewModel.LoginState.Successful -> {
+                    hideLoading()
+                    findNavController().navigate(R.id.action_loginFragment_to_welcomeFragment)
+                }
+                is LoginViewModel.LoginState.Failure -> {
+                    showToast("That bai")
+                    hideLoading()
+                }
+            }
         })
     }
 
@@ -83,7 +86,4 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         }
     }
 
-    override fun getViewModelProviderOwner(): ViewModelStoreOwner {
-        return this
-    }
 }

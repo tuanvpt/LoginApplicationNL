@@ -1,4 +1,4 @@
-package com.example.loginapplicationnl.ui.Welcome
+package com.example.loginapplicationnl.ui.welcome
 
 import com.example.loginapplicationnl.base.BaseViewModel
 
